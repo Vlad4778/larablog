@@ -40,8 +40,13 @@ class Post extends Model
     	return $this->hasMany(Comment::class);
     }
 
-    public function addComments($comment)
+    public function addComments($request)
     {
-    	$this->comments()->create(['comment'=>$comment]);
+    	$this->comments()->create($request->all());
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(\App\Tag::class);
     }
 }

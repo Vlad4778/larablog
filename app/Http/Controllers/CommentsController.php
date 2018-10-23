@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Post;
+use App\Mail\WelcomeAgain;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -14,8 +15,10 @@ class CommentsController extends Controller
 		// 	'comment' => request('comment'),
 		// 	'post_id' => $post->id
 		// ]);
+        // dd(request('email'));
+    	$comment_id = $post->addComments(request());
+        \Mail::to(request('email'))->send(new WelcomeAgain($post,$comment_id));
 
-    	$post->addComments(request('comment'));
     	// $this->validate(
     	// 	request(), 
     	// 	['body'=>'required|min:2'],

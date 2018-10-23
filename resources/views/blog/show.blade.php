@@ -6,17 +6,8 @@
     From the Firehose
   </h3>
 
-  <div class="blog-post">
-    <h2 class="blog-post-title">
-      <a href="/posts/{{$post->id}}">{{$post->title}}</a>
-    </h2>
-    <p class="blog-post-meta">
-      <a href="#">{{$post->user->name}}</a> on
-      {{$post->created_at->format('d-m-Y H:i:s') }}
-    </p>
-
-    {!! $post->body !!}
-  </div>
+  @include('blog.post')
+  
   <hr>
   <h2 id="comments">Comments</h2>
   @if(count($post->comments) )
@@ -30,19 +21,8 @@
   @else
   <h3>No comments</h3>
   @endif
-  <hr>
-  <div class="card">
-    <div class="card-block">
-      <form action="/posts/{{$post->id}}/comments" method="POST">
-        @csrf
-        <div class="form-group">
-          <textarea name="comment" id="body" class="form-control" placeholder="Your comment here.."></textarea>
-        </div>
-        <div class="form-group  text-center">
-          <button type="submit" class="btn btn-outline-primary">Add comment</button>
-        </div>
-      </form>
-    </div>
-  </div>
+
+  @include('blog.partial.comments')
+  
 </div><!-- /.blog-main -->
 @endsection
